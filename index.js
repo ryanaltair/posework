@@ -4,8 +4,23 @@ import { setupCamera } from './src/camera.mjs'
 // import {drawBoundingBox, drawKeypoints, drawSkeleton, isMobile, toggleLoadingUI, tryResNetButtonName, tryResNetButtonText, updateTryResNetButtonDatGuiCss} from './demo_util';
 
 import { drawBoundingBox, drawKeypoints, drawSkeleton } from './src/ulti.mjs'
-const videoSize = 640
-
+const videoSize = 320
+const keyPointNames = [
+  'nose',
+  'leftShoulder',
+  'rightShoulder',
+  'leftElbow',
+  'rightElbow',
+  'leftWrist',
+  'rightWrist',
+  'leftHip',
+  'rightHip',
+  'leftKnee',
+  'rightKnee',
+  'leftAnkle',
+  'rightAnkle'
+]
+let testCount = 0
 const logger = document.querySelector('#info')
 function log () {
   logger.innerHTML = [...arguments]
@@ -38,30 +53,21 @@ function drawVideo (video, ctx) {
   }
 }
 function updateEntity (keypoints) {
-  const ids = [
-    'nose',
-    'leftShoulder',
-    'rightShoulder',
-    'leftElbow',
-    'rightElbow',
-    'leftWrist',
-    'rightWrist',
-    'leftHip',
-    'rightHip',
-    'leftKnee',
-    'rightKnee',
-    'leftAnkle',
-    'rightAnkle'
-  ]
+  const ids = [...keyPointNames]
   // const table = []
+  testCount++
   const scale = 0.01
+  const checklist = document.querySelector('#checklist')
   for (const keypoint of keypoints) {
     if (ids.includes(keypoint.part)) {
-      document.querySelector(`#${keypoint.part}`).object3D.position.x =
-        keypoint.position.x * scale
-      document.querySelector(`#${keypoint.part}`).object3D.position.y =
-        -1 * keypoint.position.y * scale + 4
-      document.querySelector(`#${keypoint.part}`).object3D.position.z = -5
+      const mesh = document.querySelector(`#${keypoint.part}`)
+
+      mesh.object3D.position.x = keypoint.position.x * scale
+      mesh.object3D.position.y = -1 * keypoint.position.y * scale + 4
+      mesh.object3D.position.z = -5
+      checklist.querySelector(
+        `#${keypoint.part}Percent`
+      ).innerText = `${keypoint.score}%`
       // table.push(
       //   `${keypoint.part} x:${keypoint.position.x}  y:${keypoint.position.y} /r`
       // )
@@ -117,6 +123,17 @@ function detectPoseInRealTime (video, net, ctx) {
 async function bindPage () {
   const video = await loadVideo()
   const ctx = buildCanvas()
+  for (const name of keyPointNames) {
+    const divEl = document.createElement('div')
+    const idEl = document.createElement('span')
+    idEl.innerText = name + ':'
+    const percentEl = document.createElement('span')
+    percentEl.id = name + 'Percent'
+    percentEl.innerText = '0%'
+    divEl.append(idEl)
+    divEl.append(percentEl)
+    document.querySelector('#checklist').append(divEl)
+  }
   console.log('loading net')
   const net = await posenet
     .load({
