@@ -6,6 +6,7 @@ and preview the pose with cylinder in a-scene.
 grab pose with tensorflow.js and PoseNet
 
 have fun to visit [GH-PAGE](https://ryanaltair.github.io/posework/)
+> make sure GCP is available. 
 ### how to run
 ```
 npm install serve
@@ -14,12 +15,29 @@ npx serve .
 open localhost:5000 for preview
 
 ### notes
-due to posenet is only export pose position in 2D,
-which means there is much works to do, to make a real 3D pose.
-For example, 
-turn 2D position to 3d position, 
-with the help of skeleton data, especially bones, we could get unknown z axis.
-and with the help of how bone are connect, calc the point rotation.
+due to poseNet is only export pose position in 2D,calls keyPoints.
 
-For now, posenet is still slow and not accurate enough, 
-on MacBook Pro (13-inch, 2018) with 2.3 GHz quad core.
+which means there is much works to do, to make a real 3D pose.
+
+For example
+
+turn 2D keypoint to 3d joint:
+
+grasp skeleton data, especially bones
+
+we could get unknown z axis, 
+
+comparing the distance of related keyPoints in 2d to real bone length,
+
+we could get bone rotation.
+
+but due to the accurate, it's a real challenge.
+
+
+### poseNet settings 
+using ResNet50
+video: 640*640
+outputStride: 16
+
+> For now, poseNet is still slow and not accurate enough, 
+> on MacBook Pro (13-inch, 2018) with 2.3 GHz quad core.
