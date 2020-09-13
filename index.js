@@ -1,9 +1,9 @@
 /* eslint-env browser */
 /* global posenet */
-import { setupCamera } from './camera.mjs'
+import { setupCamera } from './src/camera.mjs'
 // import {drawBoundingBox, drawKeypoints, drawSkeleton, isMobile, toggleLoadingUI, tryResNetButtonName, tryResNetButtonText, updateTryResNetButtonDatGuiCss} from './demo_util';
 
-import { drawBoundingBox, drawKeypoints, drawSkeleton } from './ulti.mjs'
+import { drawBoundingBox, drawKeypoints, drawSkeleton } from './src/ulti.mjs'
 const videoSize = 640
 
 const logger = document.querySelector('#info')
