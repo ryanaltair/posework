@@ -5,6 +5,7 @@ and preview the pose with cylinder in a-scene.
 
 grab pose with tensorflow.js and PoseNet
 
+have fun to visit [GH-PAGE](https://ryanaltair.github.io/posework/)
 ### how to run
 ```
 npm install serve
