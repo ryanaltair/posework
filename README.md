@@ -41,3 +41,8 @@ outputStride: 16
 
 > For now, poseNet is still slow and not accurate enough, 
 > on MacBook Pro (13-inch, 2018) with 2.3 GHz quad core.
+
+### refer
+
+xbot model from https://github.com/mrdoob/three.js/blob/master/examples/models/gltf/Xbot.glb
+soldier model from https://github.com/mrdoob/three.js/blob/master/examples/models/gltf/Soldier.glb

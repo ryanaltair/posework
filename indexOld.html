@@ -1,0 +1,90 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src='./src/component_bind.js'></script>
+    <style>
+        a-scene {
+            height: 320px;
+            width: 320px;
+        }
+    </style>
+</head>
+
+<body>
+    <script type="module" src="./index.js">
+    </script>
+
+    <p id=info>loading posenet model takes seconds</p>
+    <video id="video" playsinline hidden>
+    </video>
+    <div style="display: flex;">
+
+        <div>
+            <a-scene embedded>
+                <a-cylinder position="0 0.2 -5" height="1.13" radius="0.1" color="#EF2D5E"></a-cylinder>
+                <!-- <a-entity position="-1 4 -5"> -->
+                <a-cylinder id="leftShoulder" bind='#leftElbow' height="0.3" height="0.3" radius="0.1" color="red">
+                    <a-cylinder position='0 0 0.5' rotation='90 0 0' height="1.13" radius="0.1" color="red">
+                    </a-cylinder>
+                </a-cylinder>
+                <a-cylinder id="rightShoulder" bind='#rightElbow' height="0.3" height="0.3" radius="0.1" color="red">
+                    <a-cylinder position='0 0 0.5' rotation='90 0 0' height="1.13" radius="0.1" color="red">
+                    </a-cylinder>
+                </a-cylinder>
+                <a-cylinder id="leftElbow" bind='#leftWrist' height="0.3" radius="0.1" color="blue">
+                    <a-cylinder position='0 0 0.5' rotation='90 0 0' height="1.13" radius="0.1" color="red">
+                    </a-cylinder>
+                </a-cylinder>
+                <a-cylinder id="rightElbow" bind='#rightWrist' height="0.3" radius="0.1" color="blue">
+                    <a-cylinder position='0 0 0.5' rotation='90 0 0' height="1.13" radius="0.1" color="red">
+                    </a-cylinder>
+                </a-cylinder>
+                <a-cylinder id="leftWrist" height="0.3" radius="0.1" color="green">
+                    <a-cylinder position='0 0 0.5' rotation='90 0 0' height="1.13" radius="0.1" color="red">
+                    </a-cylinder>
+                </a-cylinder>
+                <a-cylinder id="rightWrist" height="0.3" radius="0.1" color="green">
+                    <a-cylinder position='0 0 0.5' rotation='90 0 0' height="1.13" radius="0.1" color="red">
+                    </a-cylinder>
+                </a-cylinder>
+
+                <a-sphere id="nose" radius="0.35" color="black"></a-sphere>
+                <a-cylinder id="leftHip" bind='#leftShoulder' height="0.3" radius="0.21" color="red">
+                    <a-cylinder position='0 0 0.5' rotation='90 0 0' height="1.13" radius="0.1" color="red">
+                    </a-cylinder>
+                </a-cylinder>
+                <a-cylinder id="rightHip" bind='#rightShoulder' height="0.3" radius="0.21" color="red">
+                    <a-cylinder position='0 0 0.5' rotation='90 0 0' height="1.13" radius="0.1" color="red">
+                    </a-cylinder>
+                </a-cylinder>
+                <a-cylinder id="leftKnee" bind='#leftHip' height="0.3" radius="0.21" color="blue">
+                    <a-cylinder position='0 0 0.5' rotation='90 0 0' height="1.13" radius="0.1" color="red">
+                    </a-cylinder>
+                </a-cylinder>
+                <a-cylinder id="rightKnee" bind='#rightHip' height="0.3" radius="0.21" color="blue">
+                    <a-cylinder position='0 0 0.5' rotation='90 0 0' height="1.13" radius="0.1" color="red">
+                    </a-cylinder>
+                </a-cylinder>
+                <a-cylinder id="leftAnkle" bind='#leftKnee' height="0.3" radius="0.21" color="green">
+                    <a-cylinder position='0 0 0.5' rotation='90 0 0' height="1.13" radius="0.1" color="red">
+                    </a-cylinder>
+                </a-cylinder>
+                <a-cylinder id="rightAnkle" bind='#rightKnee' height="0.3" radius="0.21" color="green">
+                    <a-cylinder position='0 0 0.5' rotation='90 0 0' height="1.13" radius="0.1" color="red">
+                    </a-cylinder>
+                </a-cylinder>
+                <!-- </a-entity> -->
+                <a-camera position="0 1.6 0"> </a-camera>
+                <a-sky color="#ECECEC"></a-sky>
+            </a-scene>
+        </div>
+        <canvas id="output" ></canvas>
+        <div id="checklist"></div>
+    </div>
+    <a href="https://github.com/ryanaltair/posework">go to repo</a>
+</body>
+
+</html>
