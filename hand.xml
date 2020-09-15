@@ -1,0 +1,19 @@
+<a-scene vr-mode-ui="enabled: false" background="color: blue">
+    <a-assets>
+        <a-asset-item id="bot" src="./assets/Xbot.glb"></a-asset-item>
+        <!-- <a-asset-item id="pic" src="./assets/pose.png"></a-asset-item> -->
+        <!-- <canvas id="output" crossorigin="anonymous"></canvas> -->
+    </a-assets>
+    <!-- <a-plane width="5" height="5" material="shader: flat; src: #pic"></a-plane> -->
+    <!-- <a-entity position="0 7.5 -1" geometry="primitive: plane; height:5;width: 5" material="src: assets/pose.png;"></a-entity> -->
+    <a-entity id='input' webcam position="0 2.5 -5"></a-entity>
+    <a-entity id='handBalls' position="0 0 -1"></a-entity>
+    <a-entity rotatiton="45 00 0" position="0 10 0">
+
+        <a-entity id='handBallsPos' animation="property:rotation;isRawProperty:true;to:0 360 0;loop:true;dur:3000"></a-entity>
+    </a-entity>
+
+    <!-- <a-plane width="5" height="5" rotation="-90 0 0"></a-plane> -->
+    <a-entity scale="10 10 10" position="-10 -10 0" visible='false' gltf-model="#bot" hand_pose="input:#webcamInput"></a-entity>
+    <a-entity id="camera" position="0 3 20" wasd-controls="acceleration:100;fly:true" camera="zoom:1;far:300;" look-controls  ></a-entity>
+</a-scene>

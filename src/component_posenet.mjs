@@ -75,6 +75,7 @@ const componentPrototype = {
   },
   ctx: undefined,
   init: function () {
+    console.log('input', this.data.input)
     const el = this.el
 
     window.bonesMap = this.bonesMap
@@ -157,7 +158,7 @@ const componentPrototype = {
                 console.log('posKey', posKey, angle * THREE.Math.RAD2DEG)
               }
               mesh.rotation.set(0, 0, 0)
-              mesh.rotateZ(-angle)
+              mesh.rotateZ(angle)
             }
           }
           // console.log('pose', pose)

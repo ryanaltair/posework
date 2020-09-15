@@ -20,8 +20,9 @@ function isMobile () {
 const componentPrototype = {
   dependencies: ['geometry', 'material'],
   schema: {
-    width: { default: 640 },
-    height: { default: 640 }
+    width: { default: 20 },
+    height: { default: 20 },
+    videoSize: { default: 640 }
   },
   videoEl: undefined,
   init: function () {
@@ -30,9 +31,10 @@ const componentPrototype = {
     this.videoEl = videoEl
     videoEl.id = 'webcamInput'
     const assetsEl = document.querySelector('a-assets')
+    const videoSize = this.data.videoSizes
     assetsEl.append(videoEl)
-    videoEl.width = this.data.width
-    videoEl.height = this.data.height
+    videoEl.width = videoSize
+    videoEl.height = videoSize
     window.webCamSource = videoEl
     const mobile = isMobile()
     navigator.mediaDevices
@@ -40,8 +42,8 @@ const componentPrototype = {
         audio: false,
         video: {
           facingMode: 'user',
-          width: mobile ? undefined : this.data.width,
-          height: mobile ? undefined : this.data.width
+          width: mobile ? undefined : videoSize,
+          height: mobile ? undefined : videoSize
         }
       })
       .then(stream => {
@@ -57,8 +59,8 @@ const componentPrototype = {
       console.log('web cam loaded', el)
       el.setAttribute('geometry', {
         primitive: 'plane',
-        height: 4,
-        width: 4
+        height: this.data.height,
+        width: this.data.width
       })
       el.setAttribute('material', {
         color: '#FFF',

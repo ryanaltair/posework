@@ -11,4 +11,9 @@ const componentPrototype = {
     this.el.object3D.lookAt(targetPos.x, targetPos.y, targetPos.z)
   }
 }
-AFRAME.registerComponent('bind', componentPrototype)
+
+async function register (FRAME) {
+  console.log('register', 'bind')
+  FRAME.registerComponent('bind', componentPrototype)
+}
+export { register }

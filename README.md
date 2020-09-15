@@ -33,6 +33,14 @@ we could get bone rotation.
 
 but due to the accurate, it's a real challenge.
 
+#### update 2020-9-15
+that will be cool to use rotation rather than position
+
+calc the point joints rotation
+
+and map it to bot skeleton.
+
+have to figure out how to get joints' rotation in right way.
 
 ### poseNet settings 
 using ResNet50
